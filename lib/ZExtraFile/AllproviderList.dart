@@ -1,3 +1,6 @@
+import 'dart:js';
+
+import 'package:checkreg/AAProd/Logic/bloc/prodwithcart_bloc.dart';
 import 'package:checkreg/ACheckFolder/shop/bloc/shop_bloc.dart';
 import 'package:checkreg/Backend/Logic/Bloc/Product/Product_Show/productshow_bloc.dart';
 import 'package:checkreg/Backend/Logic/Bloc/Product/Search_Product/searchproduct_bloc.dart';
@@ -25,6 +28,7 @@ class MainBloc {
           create: (ctx) =>
               CartpBloc(cartRespo: CartDataRespo(), storage: storage)),
       BlocProvider(create: (context) => ShopBloc()),
+      BlocProvider(create: (context) => ProdwithcartBloc())
     ];
   }
 }

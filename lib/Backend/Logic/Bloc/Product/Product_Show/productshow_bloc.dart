@@ -26,24 +26,15 @@ class ProductshowBloc extends Bloc<ProductshowEvent, ProductshowState> {
       yield ProductLoadingState();
 
       try {
-        dynamic token = storage.getItem('token');
         List<ProductC> productData = await prodRespo.getProduct();
-        List<NewCart> cartData = await cartRespo!.getCartData();
+
         // yield ProductLoadedState(productData: productData);
-        yield ProductLoadedState(productData: productData, cartData: cartData);
+        yield ProductLoadedState(
+          productData: productData,
+        );
       } catch (e) {
         yield ProductErrorState(message: e.toString());
       }
-    }
-    // ! CART EVENT METHOD IN PRODUCT BLOC
-    if (event is ItemAddingCartEvent) {
-      yield ItemAddingCartState(cartItems: event.cartItems);
-    }
-    if (event is ItemAddedCartEvent) {
-      yield ItemAddedCartState(cartItems: event.cartItems);
-    }
-    if (event is ItemDeleteCartEvent) {
-      yield ItemDeletingCartState(cartItems: event.cartItems);
     }
   }
 }

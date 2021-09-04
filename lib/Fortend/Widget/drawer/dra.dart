@@ -1,3 +1,6 @@
+import 'package:checkreg/AAProd/ui/Cart/Cartm.dart';
+import 'package:checkreg/AAProd/ui/ProdCart/PCDetail.dart';
+import 'package:checkreg/AAProd/ui/ProdCart/ProdCart.dart';
 import 'package:checkreg/ACheckFolder/UI/product_page.dart';
 import 'package:checkreg/Fortend/RCLS/CartScr.dart';
 import 'package:checkreg/Fortend/secscrren/Product_Scr/GridViewList.dart';
@@ -22,14 +25,19 @@ class _MyDrawerListState extends State<MyDrawerList> {
         // top  level widgets
         // itemList(context, () => ProductListView(),
         //     title: ' List Product', icon: Icons.pages_outlined),
-        // itemList(context, () => ProductGridView(),
-        //     title: ' GridView ', icon: Icons.pages_outlined),
+        itemList(context, () => ProductGridView(),
+            title: ' GridView ', icon: Icons.pages_outlined),
         // itemList(context, () => SearchProductPage(),
         //     title: ' Search Product', icon: Icons.pages_outlined),
         // itemList(context, () => CartScreen(),
         //     title: ' CartPage ', icon: Icons.pages_outlined),
-        itemList(context, () => ProductPage(),
-            title: ' ProductPage ', icon: Icons.pages_outlined),
+        // itemList(context, () => ProductPage(),
+        //     title: ' ProductPage ', icon: Icons.pages_outlined),
+        itemList(context, () => ProdWithCartPage(),
+            title: ' ProductWithPage ', icon: Icons.pages_outlined),
+
+        itemList(context, () => PCShoppingCart(),
+            title: ' cart ', icon: Icons.pages_outlined),
       ])),
     );
   }
