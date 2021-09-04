@@ -26,11 +26,15 @@ class ProdAddingCartEvent extends ProdwithcartEvent {
 }
 
 class ProdAddedCartEvent extends ProdwithcartEvent {
-  List<NewCart> cartItems;
+  // List<NewCart> cartItems;
+  // final String prodname;
+  final String product_id;
+  final int quantity;
 
-  ProdAddedCartEvent({required this.cartItems});
+  // ProdAddedCartEvent({required this.cartItems});
+  ProdAddedCartEvent({required this.product_id, this.quantity = 1});
   @override
-  List<Object> get props => [cartItems];
+  List<Object> get props => [];
 }
 
 class ProdDeleteCartEvent extends ProdwithcartEvent {

@@ -33,9 +33,9 @@ class _ProdWithCartPageState extends State<ProdWithCartPage> {
   Widget build(BuildContext context) {
     return BlocConsumer<ProdwithcartBloc, ProdwithcartState>(
       listener: (context, state) {
-        print(
-            '----------------------------------------------------------------');
-        print('builder STATE :- $state');
+        // print(
+        //     '----------------------------------------------------------------');
+        // print('builder STATE :- $state');
 
         if (state is ProdwithcartInitial) {}
         // else if (state is ProductCartLoadedState) {
@@ -45,21 +45,23 @@ class _ProdWithCartPageState extends State<ProdWithCartPage> {
         // }
         if (state is ProdAddedCartState) {
           print('THis is ProductAdded State ${state.cartItems}');
-          BlocProvider.of<ProdwithcartBloc>(context)
-              .add(ProdAddedCartEvent(cartItems: state.cartItems));
+          // BlocProvider.of<ProdwithcartBloc>(context)
+          //     .add(ProdAddedCartEvent(cartItems: state.cartItems));
+          // BlocProvider.of<ProdwithcartBloc>(context)
+          //     .add(ProdAddedCartEvent(id: state.cartItems[0].product.id));
         }
         if (state is ProdDeletingCartState) {
           // _cartItems = state.cartItems;
-          print('THis is ProdDeletingLoaded State');
-          print('THis is ProductDelete State ${state.cartItems}');
+          // print('THis is ProdDeletingLoaded State');
+          // print('THis is ProductDelete State ${state.cartItems}');
         }
       },
 
       // ! BUILDER STATE IN BLOC
       builder: (context, state) {
-        print(
-            '----------------------------------------------------------------');
-        print('builder STATE :- $state');
+        // print(
+        //     '----------------------------------------------------------------');
+        // print('builder STATE :- $state');
 
         if (state is ProductCartLoadingState) {
           return Center(child: CircularProgressIndicator());
@@ -68,8 +70,8 @@ class _ProdWithCartPageState extends State<ProdWithCartPage> {
           return Center(child: Text(' this is eror ${state.message}'));
         }
         if (state is ProductCartLoadedState) {
-          print('stae of Productcart laoded ${state.productData}');
-          print('state of Productcart Cart laoded ${state.cartData}');
+          // print('stae of Productcart laoded ${state.productData}');
+          // print('state of Productcart Cart laoded ${state.cartData}');
           return Scaffold(
               appBar: CustomAppBar(
                 titlename: 'ProductPage',

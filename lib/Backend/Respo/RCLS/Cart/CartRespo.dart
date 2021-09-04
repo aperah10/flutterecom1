@@ -14,13 +14,12 @@ import 'package:localstorage/localstorage.dart';
 LocalStorage storage = new LocalStorage('usertoken');
 var token = storage.getItem('token');
 
-abstract class CartRespo {
-  Future<List<NewCart>> getCartData();
-  // Future<List<NewCart>> addCartData();
-}
+// abstract class CartRespo {
+//   Future<List<NewCart>> getCartData();
+//   Future<bool> addCartData();
+// }
 
-class CartDataRespo extends CartRespo {
-  @override
+class CartDataRespo {
   Future<List<NewCart>> getCartData() async {
     String baseUrl = 'https://djecoms.herokuapp.com/cart/';
     try {
@@ -51,29 +50,35 @@ class CartDataRespo extends CartRespo {
   }
 
   // ! ADD TO CART ENVET
-  @override
-  Future<void> addCartData(
-      // {}
-      ) async {
-    String Baseurl = 'http://10.0.2.2:8000/api/addtocart/';
-    // var token = storage.getItem('token');
+
+  Future<bool> addCartData(
+      {required String product_id, required int quantity}) async {
+    print('this is id $product_id');
+    print('this is Quantity $quantity');
+    String Baseurl = 'https://djecoms.herokuapp.com/pm/';
+    var token = storage.getItem('token');
     try {
       var res = await http.post(Uri.parse(Baseurl),
           body: json.encode({
-            // 'id': id,
+            'quantity': quantity,
+            'product': product_id,
           }),
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json; charset=UTF-8",
             'Authorization': "token $token"
           });
       var data = json.decode(res.body) as Map;
+      print('this is data $data');
       print('CART POST MEHTOD Statuc Code  :-  ${res.statusCode}');
       if (data['error'] == false) {
         getCartData();
+        return true;
       }
+      return false;
     } catch (e) {
       print("e addtoCart");
       print(e);
+      return false;
     }
   }
 }

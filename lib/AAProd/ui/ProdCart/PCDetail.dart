@@ -127,21 +127,12 @@ class _PCDetailPageState extends State<PCDetailPage> {
                             color: Colors.pink,
                             onPressed: () {
                               if (_itemselected == false) {
-                                NewCart cartItem = NewCart(
-                                    // imageUrl: widget.shopItem.imageUrl,
-                                    // title: widget.shopItem.title,
-                                    // price: widget.shopItem.price,
-                                    // quantity: 5,
-                                    // product: widget.prodNumber,
-                                    // createdOn: widget.prodNumber.createdOn,
-                                    // customerCart: widget.prodNumber.customerCart,
-                                    // id: widget.prodNumber.id,
-                                    );
-                                List<NewCart> cart = [];
-                                cart.add(cartItem);
-
+                                // BlocProvider.of<ProdwithcartBloc>(context)
+                                //   ..add(ProdAddedCartEvent(cartItems: cart));
+                                // !   PRODUCT page send data in cart
                                 BlocProvider.of<ProdwithcartBloc>(context)
-                                  ..add(ProdAddedCartEvent(cartItems: cart));
+                                  ..add(ProdAddedCartEvent(
+                                      product_id: widget.prodNumber.id));
 
                                 setState(() {
                                   _itemselected = true;

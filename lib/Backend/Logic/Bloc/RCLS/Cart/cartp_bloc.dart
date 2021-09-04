@@ -11,7 +11,7 @@ part 'cartp_event.dart';
 part 'cartp_state.dart';
 
 class CartpBloc extends Bloc<CartpEvent, CartpState> {
-  final CartRespo cartRespo;
+  final CartDataRespo cartRespo;
   LocalStorage storage = new LocalStorage('usertoken');
 
   CartpBloc({required this.cartRespo, required this.storage})

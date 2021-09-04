@@ -12,9 +12,10 @@ part 'productshow_state.dart';
 
 class ProductshowBloc extends Bloc<ProductshowEvent, ProductshowState> {
   final ProductRespo prodRespo;
-  final CartRespo? cartRespo;
-  ProductshowBloc({required this.prodRespo, this.cartRespo})
-      : super(ProductshowInitial());
+  // final CartRespo? cartRespo;
+  ProductshowBloc({
+    required this.prodRespo,
+  }) : super(ProductshowInitial());
 
   // @override
   // ProductshowState get initialState => ProductshowInitial();

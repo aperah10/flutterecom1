@@ -29,9 +29,9 @@ class ProdwithcartBloc extends Bloc<ProdwithcartEvent, ProdwithcartState> {
         List<ProductC> productData = await prodRespo.getProduct();
         List<NewCart> cartData = await cartRespo.getCartData();
 
-        print('-----------------------------------------------------------');
-        print('productData:- $productData ');
-        print('cartData:- $cartData ');
+        // print('-----------------------------------------------------------');
+        // print('productData:- $productData ');
+        // print('cartData:- $cartData ');
         yield ProductCartLoadedState(
             productData: productData, cartData: cartData);
       } catch (e) {
@@ -44,12 +44,19 @@ class ProdwithcartBloc extends Bloc<ProdwithcartEvent, ProdwithcartState> {
     /* -------------------------------------------------------------------------- */
     if (event is ProdAddingCartEvent) {
       print('ProdAddingCartEvent Happend');
-      print(event.cartItems);
+
+      //  List<NewCart> cartData = await cartRespo.getCartData();
       yield ProdAddingCartState(cartItems: event.cartItems);
     }
+
     if (event is ProdAddedCartEvent) {
       print('ProdAddedCartEvent Happend');
-      yield ProdAddedCartState(cartItems: event.cartItems);
+      List<NewCart> cartData = [];
+      // print(event.id);
+      bool prodid = await cartRespo.addCartData(
+          product_id: event.product_id, quantity: event.quantity);
+      print('RESULT  OF ADDTOCART :- $prodid');
+      yield ProdAddedCartState(cartItems: cartData);
     }
     if (event is ProdDeleteCartEvent) {
       print('ProdDeleteCartEvent Happend');

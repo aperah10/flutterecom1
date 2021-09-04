@@ -18,7 +18,7 @@ class _PCShoppingCartState extends State<PCShoppingCart> {
         builder: (context, state) {
           print("product page state: $state");
           if (state is ProdAddedCartState) {
-            print(state.cartItems[0].product);
+            print(state.cartItems);
             return Center(child: CircularProgressIndicator());
           }
 
