@@ -1,5 +1,6 @@
 import 'package:checkreg/AAProd/Logic/bloc/prodwithcart_bloc.dart';
 import 'package:checkreg/AAProd/ui/Cart/Cartm.dart';
+import 'package:checkreg/Backend/models/Product/New_Product_m.dart';
 import 'package:checkreg/Fortend/Widget/AppBarWid.dart';
 import 'package:checkreg/Fortend/Widget/Grid_List_prod.dart/GridWidget.dart';
 import 'package:flutter/material.dart';
@@ -36,19 +37,21 @@ class _ProdWithCartPageState extends State<ProdWithCartPage> {
             '----------------------------------------------------------------');
         print('builder STATE :- $state');
 
-        if (state is ProdwithcartInitial) {
-        } else if (state is ProductCartLoadedState) {
-          //   state.cartData;
-          // state.cartData;
-
-        }
+        if (state is ProdwithcartInitial) {}
+        // else if (state is ProductCartLoadedState) {
+        //   //   state.cartData;
+        //   // state.cartData;
+        //   print('THis is listner ProductCartLoaded State');
+        // }
         if (state is ProdAddedCartState) {
-          // _cartItems = state.cartItems;
-
+          print('THis is ProductAdded State ${state.cartItems}');
+          BlocProvider.of<ProdwithcartBloc>(context)
+              .add(ProdAddedCartEvent(cartItems: state.cartItems));
         }
         if (state is ProdDeletingCartState) {
           // _cartItems = state.cartItems;
-
+          print('THis is ProdDeletingLoaded State');
+          print('THis is ProductDelete State ${state.cartItems}');
         }
       },
 
@@ -65,12 +68,14 @@ class _ProdWithCartPageState extends State<ProdWithCartPage> {
           return Center(child: Text(' this is eror ${state.message}'));
         }
         if (state is ProductCartLoadedState) {
+          print('stae of Productcart laoded ${state.productData}');
+          print('state of Productcart Cart laoded ${state.cartData}');
           return Scaffold(
               appBar: CustomAppBar(
                 titlename: 'ProductPage',
                 actions: true,
               ),
-              body: GridViewWidget(
+              body: ProdCartGVW(
                 productstate: state.productData,
               ));
         }
@@ -85,14 +90,15 @@ class _ProdWithCartPageState extends State<ProdWithCartPage> {
 /* -------------------------------------------------------------------------- */
 
 class ProdCartGVW extends StatelessWidget {
-  ProdCartGVW({Key? key}) : super(key: key);
+  ProdCartGVW({Key? key, required this.productstate}) : super(key: key);
 
   dynamic productstate;
+  // List<ProductC> productstate;
 
   @override
   Widget build(BuildContext context) {
-    print('--------------------------------');
-    print('PRODDATA:- $productstate');
+    // print('--------------------------------');
+    // print('PRODDATA:- $productstate');
     return Container(
       child: GridView.builder(
           shrinkWrap: true,
@@ -105,8 +111,9 @@ class ProdCartGVW extends StatelessWidget {
           ),
           padding: EdgeInsets.symmetric(horizontal: 20.0),
           itemBuilder: (context, index) {
-            print('--------------------------------');
-            print('PRODDATA:- $productstate');
+            // print('--------------------------------');
+            // print('PRODDATA:- $productstate');
+            // print(index);
             return PCLVBShow(prodData: productstate[index]);
           }),
     );
@@ -137,7 +144,7 @@ class PCLVBShow extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            PCDetailPage(prodNumber: prodData['index'])));
+                            PCDetailPage(prodNumber: prodData)));
               },
               title: Text(
                 prodData.title,

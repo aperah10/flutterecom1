@@ -24,6 +24,7 @@ class _PCDetailPageState extends State<PCDetailPage> {
           if (state is ProdAddingCartState) {
             //  state.cartItems;
           }
+
           return Scaffold(
             appBar: AppBar(
               leading: IconButton(
@@ -58,12 +59,12 @@ class _PCDetailPageState extends State<PCDetailPage> {
                               children: [
                                 Text(
                                   // widget.shopItem.product!.title!,
-                                  widget.prodNumber.product.title,
+                                  widget.prodNumber.title,
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
                                 Spacer(),
                                 Text(
-                                  '\$${widget.prodNumber.product.discountPrice}',
+                                  '\$${widget.prodNumber.discountPrice}',
                                 ),
                               ],
                             ),
@@ -83,10 +84,10 @@ class _PCDetailPageState extends State<PCDetailPage> {
                                 IconButton(
                                   icon: Icon(Icons.remove),
                                   onPressed: () {
-                                    if (widget.prodNumber.quantity > 0)
-                                      setState(() {
-                                        widget.prodNumber.quantity--;
-                                      });
+                                    // if (widget.prodNumber.quantity > 0)
+                                    //   setState(() {
+                                    //     widget.prodNumber.quantity--;
+                                    //   });
                                   },
                                 ),
                                 SizedBox(
@@ -98,7 +99,8 @@ class _PCDetailPageState extends State<PCDetailPage> {
                                         border: Border.all(
                                             color: Colors.black, width: 0.5)),
                                     child: Text(
-                                      widget.prodNumber.quantity.toString(),
+                                      '1',
+                                      // widget.prodNumber.quantity.toString(),
                                       textAlign: TextAlign.center,
                                     ),
                                   ),
@@ -107,7 +109,7 @@ class _PCDetailPageState extends State<PCDetailPage> {
                                   icon: Icon(Icons.add),
                                   onPressed: () {
                                     setState(() {
-                                      widget.prodNumber.quantity++;
+                                      // widget.prodNumber.quantity++;
                                     });
                                   },
                                 ),
@@ -126,15 +128,15 @@ class _PCDetailPageState extends State<PCDetailPage> {
                             onPressed: () {
                               if (_itemselected == false) {
                                 NewCart cartItem = NewCart(
-                                  // imageUrl: widget.shopItem.imageUrl,
-                                  // title: widget.shopItem.title,
-                                  // price: widget.shopItem.price,
-                                  quantity: widget.prodNumber.quantity,
-                                  product: widget.prodNumber.product,
-                                  createdOn: widget.prodNumber.createdOn,
-                                  customerCart: widget.prodNumber.customerCart,
-                                  id: widget.prodNumber.id,
-                                );
+                                    // imageUrl: widget.shopItem.imageUrl,
+                                    // title: widget.shopItem.title,
+                                    // price: widget.shopItem.price,
+                                    // quantity: 5,
+                                    // product: widget.prodNumber,
+                                    // createdOn: widget.prodNumber.createdOn,
+                                    // customerCart: widget.prodNumber.customerCart,
+                                    // id: widget.prodNumber.id,
+                                    );
                                 List<NewCart> cart = [];
                                 cart.add(cartItem);
 

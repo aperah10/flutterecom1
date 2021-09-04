@@ -44,6 +44,7 @@ class ProdwithcartBloc extends Bloc<ProdwithcartEvent, ProdwithcartState> {
     /* -------------------------------------------------------------------------- */
     if (event is ProdAddingCartEvent) {
       print('ProdAddingCartEvent Happend');
+      print(event.cartItems);
       yield ProdAddingCartState(cartItems: event.cartItems);
     }
     if (event is ProdAddedCartEvent) {

@@ -16,8 +16,9 @@ class _PCShoppingCartState extends State<PCShoppingCart> {
     return BlocConsumer<ProdwithcartBloc, ProdwithcartState>(
         listener: (context, state) {},
         builder: (context, state) {
-          print("produc page state: $state");
+          print("product page state: $state");
           if (state is ProdAddedCartState) {
+            print(state.cartItems[0].product);
             return Center(child: CircularProgressIndicator());
           }
 

@@ -24,10 +24,10 @@ class ProductDataRespo extends ProductRespo {
       // print(res.statusCode);
       if (res.statusCode == 200) {
         var datar = jsonDecode(res.body);
-        var datajson = jsonDecode(res.body).toString();
-        print(
-            '--------------------------------------------------------------------');
-        print('datajson :- $datajson');
+        // var datajson = jsonDecode(res.body).toString();
+        // print(
+        // '--------------------------------------------------------------------');
+        // print('datajson :- $datajson');
         MainProduct mpt = MainProduct.fromJson({'productData': datar});
         // print(
         //     '--------------------------------------------------------------------');
