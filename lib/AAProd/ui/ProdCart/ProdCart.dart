@@ -8,8 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'PCDetail.dart';
 
-// ! PRODUCT WITH CART PAGE
-
 class ProdWithCartPage extends StatefulWidget {
   static const routeName = '/cartproduct-screens';
 
@@ -31,32 +29,33 @@ class _ProdWithCartPageState extends State<ProdWithCartPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ProdwithcartBloc, ProdwithcartState>(
-      listener: (context, state) {
-        // print(
-        //     '----------------------------------------------------------------');
-        // print('builder STATE :- $state');
+    return BlocListener<ProdwithcartBloc, ProdwithcartState>(
+        listener: (context, state) {
+      // print(
+      //     '----------------------------------------------------------------');
+      // print('builder STATE :- $state');
 
-        if (state is ProdwithcartInitial) {}
-        // else if (state is ProductCartLoadedState) {
-        //   //   state.cartData;
-        //   // state.cartData;
-        //   print('THis is listner ProductCartLoaded State');
-        // }
-        if (state is ProdAddedCartState) {
-          print('THis is ProductAdded State ${state.cartItems}');
-          // BlocProvider.of<ProdwithcartBloc>(context)
-          //     .add(ProdAddedCartEvent(cartItems: state.cartItems));
-          // BlocProvider.of<ProdwithcartBloc>(context)
-          //     .add(ProdAddedCartEvent(id: state.cartItems[0].product.id));
-        }
-        if (state is ProdDeletingCartState) {
-          // _cartItems = state.cartItems;
-          // print('THis is ProdDeletingLoaded State');
-          // print('THis is ProductDelete State ${state.cartItems}');
-        }
-      },
-
+      if (state is ProdwithcartInitial) {
+      } else if (state is ProductCartLoadedState) {
+        //   state.cartData;
+        // state.cartData;
+        print('THis is listner ProductCartLoaded State');
+      }
+      if (state is ProdAddedCartState) {
+        print('THis is ProductAdded State ${state.cartItems}');
+        // BlocProvider.of<ProdwithcartBloc>(context)
+        //     .add(ProdAddedCartEvent(cartItems: state.cartItems));
+        // BlocProvider.of<ProdwithcartBloc>(context)
+        //     .add(ProdAddedCartEvent(id: state.cartItems[0].product.id));
+        Scaffold(body: Center(child: Text('PRODUCT ADDED IN CART')));
+      }
+      if (state is ProdDeletingCartState) {
+        // _cartItems = state.cartItems;
+        // print('THis is ProdDeletingLoaded State');
+        // print('THis is ProductDelete State ${state.cartItems}');
+        Scaffold(body: Center(child: Text('PRODUCT Delete IN CART')));
+      }
+    }, child: BlocBuilder<ProdwithcartBloc, ProdwithcartState>(
       // ! BUILDER STATE IN BLOC
       builder: (context, state) {
         // print(
@@ -83,9 +82,94 @@ class _ProdWithCartPageState extends State<ProdWithCartPage> {
         }
         return Scaffold(body: Center(child: CircularProgressIndicator()));
       },
-    );
+    ));
   }
 }
+
+/* -------------------------------------------------------------------------- */
+/*                                    // !                                    */
+/* -------------------------------------------------------------------------- */
+
+// ! PRODUCT WITH CART PAGE
+
+// class ProdWithCartPage extends StatefulWidget {
+//   static const routeName = '/cartproduct-screens';
+
+//   ProdWithCartPage({Key? key}) : super(key: key);
+
+//   @override
+//   _ProdWithCartPageState createState() => _ProdWithCartPageState();
+// }
+
+// class _ProdWithCartPageState extends State<ProdWithCartPage> {
+//   ProdwithcartBloc prodBloc = ProdwithcartBloc();
+
+//   @override
+//   void initState() {
+//     prodBloc = BlocProvider.of<ProdwithcartBloc>(context);
+//     prodBloc.add(FetchProductEvent());
+//     super.initState();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocConsumer<ProdwithcartBloc, ProdwithcartState>(
+//       listener: (context, state) {
+//         // print(
+//         //     '----------------------------------------------------------------');
+//         // print('builder STATE :- $state');
+
+//         if (state is ProdwithcartInitial) {}
+//         // else if (state is ProductCartLoadedState) {
+//         //   //   state.cartData;
+//         //   // state.cartData;
+//         //   print('THis is listner ProductCartLoaded State');
+//         // }
+//         if (state is ProdAddedCartState) {
+//           print('THis is ProductAdded State ${state.cartItems}');
+//           // BlocProvider.of<ProdwithcartBloc>(context)
+//           //     .add(ProdAddedCartEvent(cartItems: state.cartItems));
+//           // BlocProvider.of<ProdwithcartBloc>(context)
+//           //     .add(ProdAddedCartEvent(id: state.cartItems[0].product.id));
+//           Scaffold(body: Center(child: Text('PRODUCT ADDED IN CART')));
+//         }
+//         if (state is ProdDeletingCartState) {
+//           // _cartItems = state.cartItems;
+//           // print('THis is ProdDeletingLoaded State');
+//           // print('THis is ProductDelete State ${state.cartItems}');
+//           Scaffold(body: Center(child: Text('PRODUCT Delete IN CART')));
+//         }
+//       },
+
+//       // ! BUILDER STATE IN BLOC
+//       builder: (context, state) {
+//         // print(
+//         //     '----------------------------------------------------------------');
+//         // print('builder STATE :- $state');
+
+//         if (state is ProductCartLoadingState) {
+//           return Center(child: CircularProgressIndicator());
+//         }
+//         if (state is ProductCartErrorState) {
+//           return Center(child: Text(' this is eror ${state.message}'));
+//         }
+//         if (state is ProductCartLoadedState) {
+//           // print('stae of Productcart laoded ${state.productData}');
+//           // print('state of Productcart Cart laoded ${state.cartData}');
+//           return Scaffold(
+//               appBar: CustomAppBar(
+//                 titlename: 'ProductPage',
+//                 actions: true,
+//               ),
+//               body: ProdCartGVW(
+//                 productstate: state.productData,
+//               ));
+//         }
+//         return Scaffold(body: Center(child: CircularProgressIndicator()));
+//       },
+//     );
+//   }
+// }
 
 /* -------------------------------------------------------------------------- */
 /*                     // ! PRODUCT CART GRID VIEW WIDGET                     */
@@ -140,8 +224,9 @@ class PCLVBShow extends StatelessWidget {
             Image.asset(prodData.pic == null ? '' : prodData.pic),
             ListTile(
               onTap: () {
-                print('--------------------------------');
+                print('---------------------------------------------------');
                 print('PRODDATA:- $prodData');
+
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -165,17 +250,15 @@ class PCLVBShow extends StatelessWidget {
                   btnname: 'buynow',
                 ),
                 PCBtnC(
-                  btnname: 'addtocart',
-                  sendPage: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => BlocProvider.value(
-                                value:
-                                    BlocProvider.of<ProdwithcartBloc>(context),
-                                child: PCShoppingCart())));
-                  },
-                ),
+                    btnname: prodData.title == 'p2' &&
+                            prodData.description == 'this is p2'
+                        ? "gotocart"
+                        : 'addtocart',
+                    sendPage: () {
+                      BlocProvider.of<ProdwithcartBloc>(context)
+                        ..add(ProdAddedCartEvent(
+                            product_id: prodData.id, quantity: 999));
+                    }),
               ],
             )
           ],
@@ -203,7 +286,6 @@ class PCBtnC extends StatelessWidget {
     return Expanded(
         child: InkWell(
             onTap: sendPage,
-            //     () {
             //   Navigator.of(context).pushReplacementNamed(sendPage);
             // },
             child: Container(

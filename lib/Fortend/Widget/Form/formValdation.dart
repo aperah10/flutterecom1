@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
 
 class AllFormValdation with ChangeNotifier {
+  dynamic prod = 5;
   mobileValidator(String? val) {
     if (val == null || val.isEmpty) {
       return 'Enter the Mobile Number';
@@ -36,6 +37,7 @@ class AllFormValdation with ChangeNotifier {
     if (val == null || val.isEmpty) {
       return 'Enter the Password';
     }
+
     return null;
   }
 }

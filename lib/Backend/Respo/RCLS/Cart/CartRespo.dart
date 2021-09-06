@@ -49,18 +49,57 @@ class CartDataRespo {
     }
   }
 
-  // ! ADD TO CART ENVET
+  /* -------------------------------------------------------------------------- */
+  /*                           // ! ADD TO CART Event                          */
+  /* -------------------------------------------------------------------------- */
 
-  Future<bool> addCartData(
+  Future<List<NewCart>> addCartData(
       {required String product_id, required int quantity}) async {
-    print('this is id $product_id');
-    print('this is Quantity $quantity');
+    print('this is qunatity,:-$quantity');
     String Baseurl = 'https://djecoms.herokuapp.com/pm/';
     var token = storage.getItem('token');
     try {
       var res = await http.post(Uri.parse(Baseurl),
           body: json.encode({
-            'quantity': quantity,
+            "quantity": quantity,
+            "product": product_id,
+          }),
+          headers: {
+            "Content-Type": "application/json; charset=UTF-8",
+            'Authorization': "token $token"
+          });
+      var data = json.decode(res.body) as Map;
+      print('this is data $data');
+      print(res.body);
+      print('CART POST MEHTOD Statuc Code  :-  ${res.statusCode}');
+
+      if (res.statusCode == 200) {
+        return getCartData();
+        // return true;
+      }
+      return Future.error("Error Fetching Data !");
+
+      // return false;
+    } catch (e) {
+      print("e addtoCart");
+      print(e);
+      // return false;
+      return Future.error("Error Fetching Data !");
+    }
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                          // ! CART PRODUCT DELETE                          */
+  /* -------------------------------------------------------------------------- */
+  Future<List<NewCart>> delCartData({
+    required String product_id,
+  }) async {
+    print('product id $product_id');
+    String Baseurl = 'https://djecoms.herokuapp.com/delcart/';
+    var token = storage.getItem('token');
+    try {
+      var res = await http.post(Uri.parse(Baseurl),
+          body: json.encode({
             'product': product_id,
           }),
           headers: {
@@ -69,16 +108,21 @@ class CartDataRespo {
           });
       var data = json.decode(res.body) as Map;
       print('this is data $data');
+      print(res.body);
       print('CART POST MEHTOD Statuc Code  :-  ${res.statusCode}');
-      if (data['error'] == false) {
-        getCartData();
-        return true;
+
+      if (res.statusCode == 200) {
+        return getCartData();
+        // return true;
       }
-      return false;
+      return Future.error("Error Fetching Data !");
+
+      // return false;
     } catch (e) {
       print("e addtoCart");
       print(e);
-      return false;
+      // return false;
+      return Future.error("Error Fetching Data !");
     }
   }
 }

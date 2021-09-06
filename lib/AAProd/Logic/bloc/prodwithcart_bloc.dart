@@ -51,16 +51,22 @@ class ProdwithcartBloc extends Bloc<ProdwithcartEvent, ProdwithcartState> {
 
     if (event is ProdAddedCartEvent) {
       print('ProdAddedCartEvent Happend');
-      List<NewCart> cartData = [];
-      // print(event.id);
-      bool prodid = await cartRespo.addCartData(
+
+      // print(event.quantity);
+      // bool prodid = await cartRespo.addCartData(
+      //     product_id: event.product_id, quantity: event.quantity);
+      List<NewCart> prodList = await cartRespo.addCartData(
           product_id: event.product_id, quantity: event.quantity);
-      print('RESULT  OF ADDTOCART :- $prodid');
-      yield ProdAddedCartState(cartItems: cartData);
+      print('RESULT  OF ADDTOCART :- $prodList');
+      yield ProdAddedCartState(cartItems: prodList);
     }
     if (event is ProdDeleteCartEvent) {
       print('ProdDeleteCartEvent Happend');
-      yield ProdDeletingCartState(cartItems: event.cartItems);
+      List<NewCart> prodList = await cartRespo.delCartData(
+        product_id: event.product_id,
+      );
+      print('RESULT  OF ADDTOCART :- $prodList');
+      yield ProdDeletingCartState(cartItems: prodList);
     }
   }
 }

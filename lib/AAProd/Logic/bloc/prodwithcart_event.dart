@@ -28,8 +28,9 @@ class ProdAddingCartEvent extends ProdwithcartEvent {
 class ProdAddedCartEvent extends ProdwithcartEvent {
   // List<NewCart> cartItems;
   // final String prodname;
+  // ignore: non_constant_identifier_names
   final String product_id;
-  final int quantity;
+  final dynamic quantity;
 
   // ProdAddedCartEvent({required this.cartItems});
   ProdAddedCartEvent({required this.product_id, this.quantity = 1});
@@ -38,9 +39,11 @@ class ProdAddedCartEvent extends ProdwithcartEvent {
 }
 
 class ProdDeleteCartEvent extends ProdwithcartEvent {
-  List<NewCart> cartItems;
-  int? index;
-  ProdDeleteCartEvent({required this.cartItems, this.index});
+  // List<NewCart> cartItems;
+  // int? index;
+  final String product_id;
+  // ProdDeleteCartEvent({required this.cartItems, this.index});
+  ProdDeleteCartEvent({required this.product_id});
   @override
-  List<Object> get props => [cartItems, index!];
+  List<Object> get props => [product_id];
 }
