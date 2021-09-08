@@ -32,6 +32,7 @@ class NewCustomUserLoginRespo with ChangeNotifier {
         print(storage.getItem('token'));
         return true;
       }
+
       return false;
     } catch (e) {
       print('Error:-  $e');
@@ -75,3 +76,18 @@ class NewCustomUserLoginRespo with ChangeNotifier {
     }
   }
 }
+
+
+
+// switch (response.statusCode) {
+//         case 200:
+//           _apiResponse.Data = User.fromJson(json.decode(response.body));
+//           msgToast('login Succesful');
+//           break;
+//         case 401:
+//           _apiResponse.ApiError = ApiError.fromJson(json.decode(response.body));
+//           break;
+//         default:
+//           _apiResponse.ApiError = ApiError.fromJson(json.decode(response.body));
+//           break;
+//       }
